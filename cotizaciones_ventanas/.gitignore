@@ -1,0 +1,41 @@
+# Archivos de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite
+
+# Archivos de configuración del entorno virtual
+venv/
+.env
+.venv/
+
+# Archivos de configuración de IDEs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Archivos de logs
+*.log
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos generados por el sistema operativo
+.*.swp
+.*.swo
+
+# Carpeta de build y distribución
+build/
+dist/
+*.egg-info/
+
+# Archivos temporales
+*.tmp
+*.bak
+*.swp
