@@ -6,7 +6,7 @@ class Cotizacion:
     def calcular_total(self):
         total = sum(ventana.calcular_costo_total() for ventana in self.ventanas)
         if self.cliente.cantidad_ventanas > 100:
-            total *= 0.9  # Apply 10% discount
+            total *= 0.9  #  10% DESCUENTO
         return total
     
     def generar_reporte_cotizacion(self):

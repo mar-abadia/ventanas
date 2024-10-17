@@ -11,3 +11,4 @@ class Cliente:
             reporte += f"- Ventana {ventana.estilo}: {ventana.ancho}x{ventana.alto}, Costo Total: {ventana.calcular_costo_total()}\n"
         reporte += f"Total: {self.calcular_total()}"
         return reporte
+    

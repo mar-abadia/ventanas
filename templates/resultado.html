@@ -1,8 +1,12 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <h2>Resultado de la Cotización</h2>
-    <p>Cliente: {{ cliente }}</p>
-    <p>Total de la Cotización: {{ total }} USD</p>
-    <a href="{{ url_for('cotizar') }}">Volver</a>
+<h2>Resultado de la Cotización</h2>
+<p>Cliente: {{ cliente }}</p>
+<p>Total de la Cotización: {{ total }} </p>
+<a href="{{ url_for('cotizar') }}">Volver</a>
+<br><br>
+<a href="{{ url_for('descargar_cotizacion', cliente=cliente, total=total) }}" class="btn btn-primary">
+    Descargar Cotización en PDF
+</a>
 {% endblock %}
