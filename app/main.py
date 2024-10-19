@@ -9,24 +9,12 @@ from rich.table import Table
 from rich.prompt import Prompt
 from rich.text import Text
 
-class Ventana:
-    def __init__(self, estilo, ancho, alto, acabado, tipo_vidrio, esmerilado=False):
-        self.estilo = estilo
-        self.ancho = ancho
-        self.alto = alto
-        self.acabado = acabado
-        self.tipo_vidrio = tipo_vidrio
-        self.esmerilado = esmerilado
-
-    def calcular_costo_total(self):
-        # Aquí iría la lógica para calcular el costo total de la ventana
-        return 500  # Ejemplo de valor fijo
-
 class Cliente:
-    def __init__(self, nombre, tipo_cliente, direccion):
+    def __init__(self, nombre, tipo_cliente, direccion, empresa):
         self.nombre = nombre
         self.tipo_cliente = tipo_cliente
         self.direccion = direccion
+        self.empresa = empresa
 
 class Cotizacion:
     def __init__(self, cliente, ventanas, descuento=0):
@@ -45,6 +33,7 @@ class Cotizacion:
         reporte = f"Cotización para {self.cliente.nombre}\n"
         reporte += f"Cliente: {self.cliente.nombre} - {self.cliente.tipo_cliente}\n"
         reporte += f"Dirección: {self.cliente.direccion}\n"
+        reporte += f"Empresa: {self.cliente.empresa}\n"
         reporte += "Ventanas:\n"
         for ventana in self.ventanas:
             reporte += f"- {ventana.estilo} ({ventana.ancho}x{ventana.alto}) - Costo: {ventana.calcular_costo_total()}\n"
@@ -60,13 +49,15 @@ class SistemaCotizacion:
 
     def menu_principal(self):
         while True:
-            print("\n[1] Registrar Ventana")
-            print("[2] Registrar Cliente")
-            print("[3] Registrar Cotización")
-            print("[4] Ver Cotizaciones")
-            print("[5] Salir")
+            print("\n[1] Registrar ventana")
+            print("[2] Registrar cliente")
+            print("[3] Registrar cotización")
+            print("[4] Ver cotizaciones")
+            print("[5] Ver clientes")
+            print("[6] Ver ventanas registradas")
+            print("[7] Salir")
 
-            opcion = Prompt.ask("Seleccione una opción", choices=["1", "2", "3", "4", "5"])
+            opcion = Prompt.ask("Seleccione una opción", choices=["1", "2", "3", "4", "5", "6", "7"])
 
             if opcion == "1":
                 self.registrar_ventana()
@@ -77,6 +68,10 @@ class SistemaCotizacion:
             elif opcion == "4":
                 self.ver_cotizaciones()
             elif opcion == "5":
+                self.ver_clientes()
+            elif opcion == "6":
+                self.ver_ventanas()
+            elif opcion == "7":
                 print("Saliendo...")
                 break
 
@@ -96,8 +91,9 @@ class SistemaCotizacion:
         nombre = Prompt.ask("Ingrese el nombre del cliente")
         tipo_cliente = Prompt.ask("Ingrese el tipo de cliente")
         direccion = Prompt.ask("Ingrese la dirección del cliente")
+        empresa = Prompt.ask("Ingrese la empresa")
 
-        cliente = Cliente(nombre, tipo_cliente, direccion)
+        cliente = Cliente(nombre, tipo_cliente, direccion, empresa)
         self.clientes.append(cliente)
         print("Cliente registrado exitosamente.")
 
@@ -140,6 +136,7 @@ class SistemaCotizacion:
         table.add_column("Nombre")
         table.add_column("Tipo de Cliente")
         table.add_column("Dirección")
+        table.add_column("Empresa")
 
         for idx, cliente in enumerate(self.clientes):
             table.add_row(str(idx), cliente.nombre, cliente.tipo_cliente, cliente.direccion)
@@ -165,7 +162,7 @@ class SistemaCotizacion:
 
         console.print(table)
 
-        indices_ventanas = Prompt.ask("Seleccione los ID de las ventanas separados por comas (ej: 1,2,3)")
+        indices_ventanas = Prompt.ask("Seleccione los ID de las ventanas separados por comas (ej: 1,2,3)") #si el cliente necesita varios tipos de ventana este sistema le deja seleccionar cuales ventanas desea
         indices_ventanas = [int(idx) for idx in indices_ventanas.split(",")]
 
         return [self.ventanas[idx] for idx in indices_ventanas]
@@ -180,6 +177,45 @@ class SistemaCotizacion:
             print(f"Cotización {idx + 1}:")
             print(cotizacion.generar_reporte())
 
+    def ver_clientes(self):
+        # Mostrar las cotizaciones realizadas
+        if not self.clientes:
+            print("No hay clientes registradas.")
+            return
+
+        console = Console()
+        table = Table(title="Clientes Registrados")
+        table.add_column("ID", justify="center")
+        table.add_column("Nombre")
+        table.add_column("Tipo de Cliente")
+        table.add_column("Dirección")
+        table.add_column("Empresa")
+
+        for idx, cliente in enumerate(self.clientes):
+            table.add_row(str(idx), cliente.nombre, cliente.tipo_cliente, cliente.direccion, cliente.empresa)
+
+        console.print(table)
+
+    def ver_ventanas(self):
+        # Mostrar las cotizaciones realizadas
+        if not self.ventanas:
+            print("No hay ventanas registradas.")
+            return
+        
+        console = Console()
+        table = Table(title="Ventanas Registradas")
+        table.add_column("ID", justify="center")
+        table.add_column("Estilo")
+        table.add_column("Dimensiones (Ancho x Alto)")
+        table.add_column("Tipo de Vidrio")
+        table.add_column("Esmerilado")
+
+        for idx, ventana in enumerate(self.ventanas):
+            esmerilado_str = "s" if ventana.esmerilado else "No"
+            table.add_row(str(idx), ventana.estilo, f"{ventana.ancho}x{ventana.alto}", ventana.tipo_vidrio, esmerilado_str)
+
+        console.print(table)
+                    
 # Ejecución principal
 if __name__ == "__main__":
     sistema = SistemaCotizacion()

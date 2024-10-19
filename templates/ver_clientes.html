@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>Clientes Registrados</h2>
+{% if clientes %}
+    <ul>
+    {% for cliente in clientes %}
+        <li>{{ cliente.nombre }} - Empresa: {{ cliente.empresa }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay clientes registrados.</p>
+{% endif %}
+{% endblock %}

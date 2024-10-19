@@ -1,4 +1,4 @@
-import pytest # type: ignore
+import pytest 
 from app.cotizacion import Cotizacion 
 from app.cliente import Cliente  
 from app.ventana import Ventana  

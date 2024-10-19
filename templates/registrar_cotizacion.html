@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>Registrar Cotización</h2>
+
+<form method="POST">
+    <div>
+        <label for="cliente">Seleccione Cliente:</label>
+        <select name="cliente" id="cliente">
+            {% if clientes and clientes | length > 0 %}
+                {% for idx in range(clientes | length) %}
+                    <option value="{{ idx }}">{{ clientes[idx].nombre }} - {{ clientes[idx].empresa }}</option>
+                {% endfor %}
+            {% else %}
+                <option value="">No hay clientes disponibles</option>
+            {% endif %}
+        </select>
+    </div>
+
+    <div>
+        <label for="ventanas">Seleccione Ventanas:</label>
+        {% if ventanas and ventanas | length > 0 %}
+            {% for idx in range(ventanas | length) %}
+                <div>
+                    <input type="checkbox" name="ventanas" value="{{ idx }}">
+                    {{ ventanas[idx].estilo }} ({{ ventanas[idx].ancho }}x{{ ventanas[idx].alto }}), Vidrio: {{ ventanas[idx].tipo_vidrio }}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No hay ventanas disponibles</p>
+        {% endif %}
+    </div>
+
+    <div>
+        <input type="submit" value="Generar Cotización">
+    </div>
+</form>
+
+{% endblock %}

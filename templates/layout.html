@@ -3,55 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Cotizaciones</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Gestión de Ventanas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <!-- Encabezado con logo -->
-    <header style="background-color: #f8f9fa; padding: 20px; text-align: center;">
-        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo de la Empresa" style="width: 150px;">
+    <header>
+        <h1>Sistema de Gestión de Ventanas</h1>
     </header>
-
-    <!-- Contenido de tu página -->
-    {% block content %}{% endblock %}
-
-    <!-- Pie de página -->
-    <footer style="background-color: #f8f9fa; padding: 20px; text-align: center; margin-top: 50px;">
-        <p>© 2024 - Sistema de Cotizaciones de Ventanas</p>
-        <p>Contacto: mar.cotizaciones@lasmejoresventanas.com</p>
+    <main>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul>
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>© 2024 - Gestión de Ventanas</p>
     </footer>
-
-    <!-- Modal de notificación -->
-    <div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="notificationModalLabel">Notificación</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="notificationMessage">
-                    <!-- Aquí se insertará el mensaje -->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Scripts de Bootstrap y lógica para mostrar el modal -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const notificationModal = new bootstrap.Modal(document.getElementById('notificationModal'));
-                document.getElementById('notificationMessage').innerText = "{{ messages[0] }}";
-                notificationModal.show();
-            });
-        </script>
-      {% endif %}
-    {% endwith %}
 </body>
 </html>

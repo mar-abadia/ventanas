@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>Ver Cotizaciones</h2>
+{% if cotizaciones %}
+    <ul>
+    {% for cotizacion in cotizaciones %}
+        <li>
+            Cliente: {{ cotizacion.cliente.nombre }} - Total: ${{ cotizacion.calcular_total() }}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay cotizaciones registradas.</p>
+{% endif %}
+{% endblock %}

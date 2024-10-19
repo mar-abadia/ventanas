@@ -1,5 +1,7 @@
 {
     "python.analysis.extraPaths": [
-        "./cotizaciones_ventanas/app"
+        "./cotizaciones_ventanas/app",
+        "./app",
+        "./cotizaciones_ventanas"
     ]
 }

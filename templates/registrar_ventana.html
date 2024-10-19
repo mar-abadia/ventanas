@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>Registrar Ventana</h2>
+<form method="POST">
+    <div>
+        <label for="estilo">Estilo de la Ventana:</label>
+        <select id="estilo" name="estilo" required>
+            <option value="O">O</option>
+            <option value="XO">XO</option>
+            <option value="OXXO">OXXO</option>
+            <option value="OXO">OXO</option>
+            
+        </select>
+    </div>
+    <div>
+        <label for="ancho">Ancho (cm):</label>
+        <input type="number" step="0.01" id="ancho" name="ancho" required>
+    </div>
+    <div>
+        <label for="alto">Alto (cm):</label>
+        <input type="number" step="0.01" id="alto" name="alto" required>
+    </div>
+    <div>
+        <label for="acabado">Acabado:</label> 
+        <select id="acabado" name="acabado" required>
+            <option value="Lacado Brillante">Lacado Brillante</option>
+            <option value="Lacado Mate">Lacado Mate</option>
+            <option value="Anodizado">Anodizado</option>            
+        </select>
+    </div>
+    <div>
+        <label for="tipo_vidrio">Tipo de Vidrio:</label>
+        <select id="tipo_vidrio" name="tipo_vidrio" required>
+            <option value="Transparente">Transparente</option>
+            <option value="Bronce">Bronce</option>
+            <option value="Azul">Azul</option>
+        </select>
+    </div>
+    <div>
+        <label for="esmerilado">¿Esmerilado?:</label>
+        <select id="esmerilado" name="esmerilado" required>
+            <option value="s">Si</option>
+            <option value="n">No</option>
+        </select>
+    </div>
+    <div>
+        <input type="submit" value="Registrar Ventana">
+    </div>
+</form>
+{% endblock %}

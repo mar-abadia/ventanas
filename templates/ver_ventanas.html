@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>Ventanas Registradas</h2>
+{% if ventanas %}
+    <ul>
+    {% for ventana in ventanas %}
+        <li>{{ ventana.estilo }} ({{ ventana.ancho }}x{{ ventana.alto }}) - Vidrio: {{ ventana.tipo_vidrio }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No hay ventanas registradas.</p>
+{% endif %}
+{% endblock %}

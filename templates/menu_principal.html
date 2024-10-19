@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>Menú Principal</h2>
+<ul>
+    <li><a href="{{ url_for('registrar_ventana') }}">Registrar Ventana</a></li>
+    <li><a href="{{ url_for('registrar_cliente') }}">Registrar Cliente</a></li>
+    <li><a href="{{ url_for('registrar_cotizacion') }}">Registrar Cotización</a></li>
+    <li><a href="{{ url_for('ver_cotizaciones') }}">Ver Cotizaciones</a></li>
+    <li><a href="{{ url_for('ver_clientes') }}">Ver Clientes</a></li>
+    <li><a href="{{ url_for('ver_ventanas') }}">Ver Ventanas Registradas</a></li>
+</ul>
+{% endblock %}
